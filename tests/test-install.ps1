@@ -62,7 +62,7 @@ try {
         $remoteInstaller = [scriptblock]::Create((Get-Content -LiteralPath $installer -Raw))
         & $remoteInstaller -Dest $remoteDest
         Assert-Payload $remoteDest
-        if ($downloadRequests[-1] -ne 'https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md') {
+        if ($downloadRequests[-1] -ne 'https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md') {
             throw 'Remote installer must download only the root SKILL.md.'
         }
         Write-Host 'PowerShell installation checks passed.'

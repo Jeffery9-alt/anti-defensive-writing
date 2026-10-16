@@ -57,7 +57,7 @@ cp "$INSTALL_TEST_SOURCE" "$4"
         self.assertEqual(0, result.returncode, result.stderr)
         self.assert_payload(self.root / '.agents/skills')
         self.assertEqual(
-            ['https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md'],
+            ['https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md'],
             (self.root / 'urls.txt').read_text().splitlines(),
         )
 
