@@ -36,6 +36,8 @@
 
 </div>
 
+This repository is the [Jeffery9-alt fork](https://github.com/Jeffery9-alt/anti-defensive-writing) of [Kiterlin/anti-defensive-writing](https://github.com/Kiterlin/anti-defensive-writing). The installation commands below use this fork. Original authorship and the MIT copyright notice are retained.
+
 ---
 
 ## Abstract
@@ -159,17 +161,17 @@ Choose **one** command corresponding to your target agent:
 
 #### Standard Codex (`~/.agents/skills`)
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills"
 ```
 
 #### Legacy Codex (`~/.codex/skills`)
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.codex/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.codex/skills"
 ```
 
 #### Claude Code (`~/.claude/skills`)
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.claude/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.claude/skills"
 ```
 
 *For project-level installation, pass a relative destination such as `--dest ".agents/skills"`, `--dest ".codex/skills"`, or `--dest ".claude/skills"`.*
@@ -182,7 +184,7 @@ Open **PowerShell 7** (`pwsh`). Configure `$skillsDir` to your target directory,
 
 ```powershell
 $skillsDir = "$HOME/.agents/skills"
-$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.ps1'))
+$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.ps1'))
 & $installSkill -Dest $skillsDir
 ```
 
@@ -196,27 +198,34 @@ Existing installations remain untouched unless explicitly updated using `--force
 
 ```sh
 # Shell: Force update to latest main
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --force
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --force
 
 # Shell: Pin to specific commit, tag, or branch
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --ref <commit-hash>
+skill_ref='c7edf8fc91ae9c4f7e58345bd12934bb4cf41c46'
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --ref "$skill_ref" --force
 ```
 
 ```powershell
+# PowerShell: Reload the installer from this fork
+$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.ps1'))
+
 # PowerShell: Force update
 & $installSkill -Dest $skillsDir -Force
 
 # PowerShell: Pin reference
-& $installSkill -Dest $skillsDir -Ref <commit-hash> -Force
+$skillRef = 'c7edf8fc91ae9c4f7e58345bd12934bb4cf41c46'
+& $installSkill -Dest $skillsDir -Ref $skillRef -Force
 ```
+
+`--ref` / `-Ref` selects the `SKILL.md` revision; the commands above fetch the installer from `main`. The SHA shown is an example payload revision. To pin the installer as well, replace `main` in its raw URL with a commit containing this fork-source fix, and set the payload ref to the desired revision.
 
 ### Manual Installation
 
-To install manually without automated scripts, create `anti-defensive-writing` inside your chosen skills directory and save the raw [`SKILL.md`](https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md) directly:
+To install manually without automated scripts, create `anti-defensive-writing` inside your chosen skills directory and save the raw [`SKILL.md`](https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md) directly:
 
 ```sh
 mkdir -p ~/.agents/skills/anti-defensive-writing
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md -o ~/.agents/skills/anti-defensive-writing/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md -o ~/.agents/skills/anti-defensive-writing/SKILL.md
 ```
 
 ---
@@ -316,7 +325,9 @@ anti-defensive-writing/
 
 ## Citation
 
-If you utilize **Anti-Defensive Writing** in your academic workflow, manuscripts, or agentic systems, please cite this work:
+### Upstream work
+
+Use the original citation for the upstream work:
 
 ```bibtex
 @software{antidefensivewriting2026,
@@ -326,6 +337,21 @@ If you utilize **Anti-Defensive Writing** in your academic workflow, manuscripts
   publisher    = {GitHub},
   journal      = {GitHub repository},
   howpublished = {\url{https://github.com/Kiterlin/anti-defensive-writing}}
+}
+```
+
+### This fork
+
+To identify this fork, use the separate entry below and record the full commit SHA you used. The author field retains the upstream attribution; Jeffery9-alt identifies the fork host.
+
+```bibtex
+@software{antidefensivewritingJeffery9Alt2026,
+  author       = {Sunlight and Contributors},
+  title        = {Anti-Defensive Writing (Jeffery9-alt fork)},
+  year         = {2026},
+  publisher    = {GitHub},
+  url          = {https://github.com/Jeffery9-alt/anti-defensive-writing},
+  note         = {Fork of Kiterlin/anti-defensive-writing, hosted by Jeffery9-alt}
 }
 ```
 

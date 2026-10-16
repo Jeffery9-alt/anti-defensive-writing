@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-REPO="Kiterlin/anti-defensive-writing"
+REPO="Jeffery9-alt/anti-defensive-writing"
 REF="${REF:-main}"
 DEST="$HOME/.agents/skills"
 SKILL_NAME="anti-defensive-writing"

@@ -64,7 +64,7 @@ try {
         Copy-Item -LiteralPath $localSource -Destination $skillFile
     } else {
         $encodedRef = [System.Uri]::EscapeDataString($Ref)
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/$encodedRef/SKILL.md" -OutFile $skillFile
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/$encodedRef/SKILL.md" -OutFile $skillFile
     }
     if ((Get-Content -LiteralPath $skillFile -TotalCount 1) -ne '---') {
         throw 'Invalid SKILL.md: missing YAML frontmatter.'

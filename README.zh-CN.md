@@ -36,6 +36,8 @@
 
 </div>
 
+本仓库是 [Kiterlin/anti-defensive-writing](https://github.com/Kiterlin/anti-defensive-writing) 的 [Jeffery9-alt fork](https://github.com/Jeffery9-alt/anti-defensive-writing)。下文安装命令使用本 fork，保留原作者署名和 MIT 版权声明。
+
 ---
 
 ## 摘要 / Abstract
@@ -154,17 +156,17 @@
 
 #### 标准 Codex 环境（`~/.agents/skills`）
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills"
 ```
 
 #### 旧版 Codex 环境（`~/.codex/skills`）
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.codex/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.codex/skills"
 ```
 
 #### Claude Code 环境（`~/.claude/skills`）
 ```sh
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.claude/skills"
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.claude/skills"
 ```
 
 *若仅需安装在当前项目，将目标路径改为相对路径即可，例如 `--dest ".agents/skills"` 或 `--dest ".claude/skills"`。*
@@ -177,7 +179,7 @@ curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/mai
 
 ```powershell
 $skillsDir = "$HOME/.agents/skills"
-$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.ps1'))
+$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.ps1'))
 & $installSkill -Dest $skillsDir
 ```
 
@@ -191,27 +193,34 @@ $installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubuser
 
 ```sh
 # Shell：强制更新到最新主分支版本
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --force
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --force
 
 # Shell：固定安装特定提交哈希、标签或分支
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --ref <commit-hash>
+skill_ref='c7edf8fc91ae9c4f7e58345bd12934bb4cf41c46'
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.sh | sh -s -- --dest "$HOME/.agents/skills" --ref "$skill_ref" --force
 ```
 
 ```powershell
+# PowerShell：重新加载本 fork 的安装器
+$installSkill = [scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/install.ps1'))
+
 # PowerShell：强制覆盖升级
 & $installSkill -Dest $skillsDir -Force
 
 # PowerShell：指定版本引用
-& $installSkill -Dest $skillsDir -Ref <commit-hash> -Force
+$skillRef = 'c7edf8fc91ae9c4f7e58345bd12934bb4cf41c46'
+& $installSkill -Dest $skillsDir -Ref $skillRef -Force
 ```
+
+`--ref` / `-Ref` 选择 `SKILL.md` 的版本；以上命令从 `main` 获取安装器。示例 SHA 对应技能载荷版本。若需同时固定安装器，将其 raw URL 中的 `main` 替换为包含本次 fork 来源修复的提交 SHA，并将载荷 ref 设置为所需版本。
 
 ### 手动安装
 
-无需脚本即可纯手动配置：在目标技能路径下建立 `anti-defensive-writing` 目录，将原始 [**SKILL.md**](https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md) 保存为该目录下的 `SKILL.md` 即可：
+无需脚本即可纯手动配置：在目标技能路径下建立 `anti-defensive-writing` 目录，将原始 [**SKILL.md**](https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md) 保存为该目录下的 `SKILL.md` 即可：
 
 ```sh
 mkdir -p ~/.agents/skills/anti-defensive-writing
-curl -fsSL https://raw.githubusercontent.com/Kiterlin/anti-defensive-writing/main/SKILL.md -o ~/.agents/skills/anti-defensive-writing/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/Jeffery9-alt/anti-defensive-writing/main/SKILL.md -o ~/.agents/skills/anti-defensive-writing/SKILL.md
 ```
 
 ---
@@ -311,7 +320,9 @@ anti-defensive-writing/
 
 ## 引用 / Citation
 
-如果您在学术研究、论文撰写或智能体工作流中使用了 **Anti-Defensive Writing**，欢迎按如下格式引用：
+### 上游原作
+
+引用上游原作时，使用原有条目：
 
 ```bibtex
 @software{antidefensivewriting2026,
@@ -321,6 +332,21 @@ anti-defensive-writing/
   publisher    = {GitHub},
   journal      = {GitHub repository},
   howpublished = {\url{https://github.com/Kiterlin/anti-defensive-writing}}
+}
+```
+
+### 当前 fork
+
+需要标识本 fork 时，使用以下独立条目，并记录实际使用的完整提交 SHA。作者字段保留上游署名，Jeffery9-alt 标识 fork 的托管者。
+
+```bibtex
+@software{antidefensivewritingJeffery9Alt2026,
+  author       = {Sunlight and Contributors},
+  title        = {Anti-Defensive Writing (Jeffery9-alt fork)},
+  year         = {2026},
+  publisher    = {GitHub},
+  url          = {https://github.com/Jeffery9-alt/anti-defensive-writing},
+  note         = {Fork of Kiterlin/anti-defensive-writing, hosted by Jeffery9-alt}
 }
 ```
 
